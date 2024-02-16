@@ -15,7 +15,7 @@ func main() {
 
   err := config.Init()
   if err != nil {
-	logger.Errorf("Config initialization error: %v",err)
+	logger.Errorf("Config initialization error: %v", err)
 	return
   }
 

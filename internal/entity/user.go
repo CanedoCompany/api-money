@@ -11,10 +11,10 @@ type User struct {
  Name string
  Email string
  Password string
- Phone number
+ Phone int64
 }
 
-func NewUser(name string, email string, password string, phone number) *User {
+func NewUser(name string, email string, password string, phone int64) *User {
  return &User{
 	ID: uuid.New().String(),
 	Name: name,
