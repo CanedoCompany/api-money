@@ -8,13 +8,31 @@ import (
 )
 
 func CreateUserHandler(ctx *gin.Context) {
-  request := CreateUserRequest{}
+		ctx.JSON(http.StatusOK,gin.H{
+			"msg": "POST User",
+		})
+}
 
-  ctx.BindJSON(&request)
+func GetUserHandler(ctx *gin.Context) {
+  ctx.JSON(http.StatusOK,gin.H{
+    "msg": "GET User",
+  })
+}
 
-  if err := request.Validate(); err != nil {
-	logger.Errorf("Validation error: %v", err.Error())
-	sendError(ctx, http.StatusBadRequest, err.Error())
-    return
-  }
+func EditUserHandler(ctx *gin.Context) {
+  ctx.JSON(http.StatusOK,gin.H{
+    "msg": "EDIT User",
+  })
+}
+
+func DeleteUserHandler(ctx *gin.Context) {
+  ctx.JSON(http.StatusOK,gin.H{
+    "msg": "DELETE User",
+  })
+}
+
+func GetAllUserHandler(ctx *gin.Context) {
+  ctx.JSON(http.StatusOK,gin.H{
+    "msg": "GET Users",
+  })
 }
