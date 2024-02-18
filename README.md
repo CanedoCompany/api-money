@@ -2,6 +2,9 @@
 
 ## The all procress is in development
 
+## ToDolist
+ - Phone number type (struct and request)
+
 ## Install all dependences in project
 
 Create your mod init
