@@ -8,13 +8,17 @@ func errParamIsRequired(name, typ string) error {
 
 // Create User
 type CreateUserRequest struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	Phone    int64  `json:"phone"`
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	Password   string `json:"password"`
+	Profission string `json:"profission"`
 }
 
 func (r *CreateUserRequest) Validate() error {
+
+	if r.Name == "" && r.Email == "" && r.Password == "" && r.Profission == "" {
+		return fmt.Errorf("request body is empty or malformed")
+	}
 
 	if r.Name == "" {
 		return errParamIsRequired("name", "string")
@@ -28,9 +32,28 @@ func (r *CreateUserRequest) Validate() error {
 		return errParamIsRequired("password", "string")
 	}
 
-	if r.Phone <= 0 {
-		return errParamIsRequired("phone", "int64")
+	if r.Profission == "" {
+		return errParamIsRequired("profission", "string")
 	}
 
 	return nil
+}
+
+// Update User
+
+type UpdateUserRequest struct {
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	Password   string `json:"password"`
+	Profission string `json:"profission"`
+}
+
+func (r *UpdateUserRequest) Validate() error {
+	// If any field is provided, validation is truthy
+	if r.Name != "" || r.Email != "" || r.Password != "" || r.Profission != "" {
+		return nil
+	}
+
+	// If none of the fields were provided, return false
+	return fmt.Errorf("at least one valid field must be provided")
 }
