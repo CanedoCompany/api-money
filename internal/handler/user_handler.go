@@ -28,7 +28,7 @@ func CreateUserHandler(ctx *gin.Context) {
 	}
 
 	if err := db.Create(&user).Error; err != nil {
-		logger.Errorf("error creating opening: %v", err.Error())
+		logger.Errorf("error creating user: %v", err.Error())
 		sendError(ctx, http.StatusInternalServerError, "error creating user on database")
 		return
 	}

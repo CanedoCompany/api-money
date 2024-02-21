@@ -2,9 +2,6 @@
 
 ## The all procress is in development
 
-## ToDolist
- - Phone number type (struct and request)
-
 ## Install all dependences in project
 
 Create your mod init
@@ -26,7 +23,10 @@ go mod tidy
 <p>Main route</p>
 $ localhost:3333/api/v1
 
-<p>User routes</p>
-$ localhost:3333/api/v1/users
+<p>User route</p>
+$ localhost:3333/api/v1/user
+
+<p>Transaction route</p>
+$ localhost:3333/api/v1/transaction
 
 ```
