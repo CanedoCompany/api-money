@@ -102,3 +102,49 @@ func (r *UpdateTransactionRequest) Validate() error {
 
 	return fmt.Errorf("at least one valid field must be provided")
 }
+
+type CreateCardRequest struct {
+	NameCard   string `json:"nameCard"`
+	NameOwner  string `json:"nameOwner"`
+	NumberCard int    `json:"numberCard"`
+	CvvCard    int    `json:"cvvCard"`
+}
+
+func (r *CreateCardRequest) Validate() error {
+	if r.NameCard == "" && r.NameOwner == "" && r.NumberCard <= 0 && r.CvvCard <= 0 {
+		return fmt.Errorf("request body is empty or malformed")
+	}
+
+	if r.NameCard == "" {
+		return errParamIsRequired("nameCard", "string")
+	}
+
+	if r.NameOwner == "" {
+		return errParamIsRequired("nameOwner", "string")
+	}
+
+	if r.NumberCard <= 0 {
+		return errParamIsRequired("NumberCard", "int")
+	}
+
+	if r.CvvCard <= 0 {
+		return errParamIsRequired("CvvCard", "int")
+	}
+
+	return nil
+}
+
+type UpdateCardRequest struct {
+	NameCard   string `json:"nameCard"`
+	NameOwner  string `json:"nameOwner"`
+	NumberCard int    `json:"numberCard"`
+	CvvCard    int    `json:"cvvCard"`
+}
+
+func (r *UpdateCardRequest) Validate() error {
+	if r.NameCard != "" || r.NameOwner != "" || r.NumberCard <= 0 || r.CvvCard <= 0 {
+		return nil
+	}
+
+	return fmt.Errorf("at least one valid field must be provided")
+}

@@ -33,6 +33,16 @@ func initializeRoutes(router *gin.Engine) {
 		v1.DELETE("/transaction", handler.DeleteTransactionHandler)
 
 		v1.GET("/transactions", handler.GetAllTransactionHandler)
+
+		v1.GET("/cards", handler.GetAllCardHandler)
+
+		v1.GET("/card", handler.GetCardHandler)
+
+		v1.POST("/card", handler.CreateCardHandler)
+
+		v1.PUT("/card", handler.EditCardHandler)
+
+		v1.DELETE("/card", handler.DeleteCardHandler)
 	}
 
 }
