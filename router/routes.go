@@ -43,6 +43,16 @@ func initializeRoutes(router *gin.Engine) {
 		v1.PUT("/card", handler.EditCardHandler)
 
 		v1.DELETE("/card", handler.DeleteCardHandler)
+
+		v1.GET("/banks", handler.GetAllBankHandler)
+
+		v1.GET("/bank", handler.GetBankHandler)
+
+		v1.POST("/bank", handler.CreateBankHandler)
+
+		v1.PUT("/bank", handler.EditBankhandler)
+
+		v1.DELETE("/bank", handler.DeleteBankHandler)
 	}
 
 }

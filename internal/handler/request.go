@@ -148,3 +148,37 @@ func (r *UpdateCardRequest) Validate() error {
 
 	return fmt.Errorf("at least one valid field must be provided")
 }
+
+type CreateBankRequest struct {
+	NameBank  string `json:"nameBank"`
+	OwnerName string `json:"ownerName"`
+}
+
+func (r *CreateBankRequest) Validate() error {
+	if r.NameBank == "" && r.OwnerName == "" {
+		return fmt.Errorf("request body is empty or malformed")
+	}
+
+	if r.NameBank == "" {
+		return errParamIsRequired("nameBank", "string")
+	}
+
+	if r.OwnerName == "" {
+		return errParamIsRequired("ownerName", "string")
+	}
+
+	return nil
+}
+
+type UpdateBankRequest struct {
+	NameBank  string `json:"nameBank"`
+	OwnerName string `json:"ownerName"`
+}
+
+func (r *UpdateBankRequest) Validate() error {
+	if r.NameBank != "" || r.OwnerName != "" {
+		return nil
+	}
+
+	return fmt.Errorf("at least one valid field must be provided")
+}

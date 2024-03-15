@@ -123,7 +123,7 @@ func DeleteCardHandler(ctx *gin.Context) {
 		return
 	}
 
-	sendSuccess(ctx, "delete-user", card)
+	sendSuccess(ctx, "delete-card", card)
 }
 
 func GetAllCardHandler(ctx *gin.Context) {
