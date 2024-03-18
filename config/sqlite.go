@@ -4,14 +4,13 @@ import (
 	"os"
 
 	"github.com/CanedoCompany/api-money/internal/entity"
-	"gorm.io/gorm"
 	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
-func InitializeSQLite() (*gorm.DB, error){
+func InitializeSQLite() (*gorm.DB, error) {
 	logger := GetLogger("sqlite")
 	dbPath := "./db/main.db"
-
 
 	// Check if the database file exists
 	_, err := os.Stat(dbPath)
@@ -37,6 +36,24 @@ func InitializeSQLite() (*gorm.DB, error){
 
 	// Migrate the entity
 	err = db.AutoMigrate(&entity.User{})
+	if err != nil {
+		logger.Errorf("sqlite automigration error: %v", err)
+		return nil, err
+	}
+
+	err = db.AutoMigrate(&entity.Transaction{})
+	if err != nil {
+		logger.Errorf("sqlite automigration error: %v", err)
+		return nil, err
+	}
+
+	err = db.AutoMigrate(&entity.Bank{})
+	if err != nil {
+		logger.Errorf("sqlite automigration error: %v", err)
+		return nil, err
+	}
+
+	err = db.AutoMigrate(&entity.Card{})
 	if err != nil {
 		logger.Errorf("sqlite automigration error: %v", err)
 		return nil, err
