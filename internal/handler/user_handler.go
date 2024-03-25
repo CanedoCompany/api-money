@@ -8,6 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+
+// @Sumary Create User
+// @Description Create a new User
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param request body CreateUserRequest true "Request body"
+// @Success 200 {object} CreateUserResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /user [post]
 func CreateUserHandler(ctx *gin.Context) {
 	request := CreateUserRequest{}
 
@@ -36,6 +48,18 @@ func CreateUserHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "create-user", user)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Shoq User
+// @Description Show a new User
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id query string true "User identification"
+// @Success 200 {object} ShowUserResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /user [get]
 func GetUserHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -54,6 +78,20 @@ func GetUserHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "show-user", user)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Update User
+// @Description Update an User
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id query string true "User identification"
+// @Param request body UpdateUserRequest true "User data to Update"
+// @Success 200 {object} CreateUserResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /user [put]
 func EditUserHandler(ctx *gin.Context) {
 	request := UpdateUserRequest{}
 
@@ -106,6 +144,18 @@ func EditUserHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "updating-user", user)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Delete User
+// @Description Delete a new User
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id query string true "User identification"
+// @Success 200 {object} DeleteUserResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /user [delete]
 func DeleteUserHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -130,6 +180,16 @@ func DeleteUserHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "delete-user", user)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Get All Users
+// @Description List all User
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Success 200 {object} GetAllUserResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /users [get]
 func GetAllUserHandler(ctx *gin.Context) {
 	users := []entity.User{}
 

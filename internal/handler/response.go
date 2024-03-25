@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/CanedoCompany/api-money/internal/entity"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,4 +23,49 @@ func sendSuccess(ctx *gin.Context, op string, data interface{}) {
 		"message": fmt.Sprintf("operation from handler: %s successfull", op),
 		"data":    data,
 	})
+}
+
+type ErrorResponse struct {
+	Message   string `json:"message"`
+	ErrorCode string `json:"errorCode"`
+}
+
+type CreateUserResponse struct {
+	Message string              `json:"message"`
+	Data    entity.UserResponse `json:"data"`
+}
+
+type DeleteUserResponse struct {
+	Message string              `json:"message"`
+	Data    entity.UserResponse `json:"data"`
+}
+
+type ShowUserResponse struct {
+	Message string              `json:"message"`
+	Data    entity.UserResponse `json:"data"`
+}
+
+type GetAllUserResponse struct {
+	Message string                `json:"message"`
+	Data    []entity.UserResponse `json:"data"`
+}
+
+type UpdateUserResponse struct {
+	Message string              `json:"message"`
+	Data    entity.UserResponse `json:"data"`
+}
+
+type CreateTransactionResponse struct {
+	Message string                     `json:"message"`
+	Data    entity.TransactionResponse `json:"data"`
+}
+
+type CreateBankResponse struct {
+	Message string              `json:"message"`
+	Data    entity.BankResponse `json:"data"`
+}
+
+type CreateCardResponse struct {
+	Message string              `json:"message"`
+	Data    entity.CardResponse `json:"data"`
 }
