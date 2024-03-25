@@ -2,8 +2,11 @@ package router
 
 import (
 	// "net/http"
+	docs "github.com/CanedoCompany/api-money/docs"
 	"github.com/CanedoCompany/api-money/internal/handler"
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // Routes
@@ -11,8 +14,10 @@ import (
 func initializeRoutes(router *gin.Engine) {
 
 	handler.InitializeHandler()
+	basePath := "/api/v1"
+	docs.SwaggerInfo.BasePath = basePath
 
-	v1 := router.Group("/api/v1")
+	v1 := router.Group(basePath)
 	{
 		v1.GET("/user", handler.GetUserHandler)
 
@@ -54,5 +59,8 @@ func initializeRoutes(router *gin.Engine) {
 
 		v1.DELETE("/bank", handler.DeleteBankHandler)
 	}
+
+	// Initialize Swagger
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 }
