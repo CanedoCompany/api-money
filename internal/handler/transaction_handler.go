@@ -8,6 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+
+// @Sumary Create Transaction
+// @Description Create a new Transaction
+// @Tags Transactions
+// @Accept json
+// @Produce json
+// @Param request body CreateTransactionRequest true "Request body"
+// @Success 200 {object} CreateTransactionResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /transaction [post]
 func CreateTransactionHandler(ctx *gin.Context) {
 	request := CreateTransactionRequest{}
 
@@ -34,6 +46,18 @@ func CreateTransactionHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "create-transaction", transaction)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Show Transaction
+// @Description Show a new Transaction
+// @Tags Transactions
+// @Accept json
+// @Produce json
+// @Param id query string true "Transaction identification"
+// @Success 200 {object} ShowTransactionResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /transaction [get]
 func GetTransactionHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -52,6 +76,20 @@ func GetTransactionHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "show-transaction", transaction)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Update Transaction
+// @Description Update an Transaction
+// @Tags Transactions
+// @Accept json
+// @Produce json
+// @Param id query string true "Transaction identification"
+// @Param request body UpdateTransactionRequest true "Transaction data to Update"
+// @Success 200 {object} CreateTransactionResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /transaction [put]
 func EditTransactionHandler(ctx *gin.Context) {
 	request := UpdateTransactionRequest{}
 
@@ -98,6 +136,18 @@ func EditTransactionHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "updating-transaction", transaction)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Delete Transaction
+// @Description Delete a new Transaction
+// @Tags Transactions
+// @Accept json
+// @Produce json
+// @Param id query string true "Transaction identification"
+// @Success 200 {object} DeleteTransactionResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /transaction [delete]
 func DeleteTransactionHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -121,6 +171,16 @@ func DeleteTransactionHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "delete-transaction", transaction)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Get All Transactions
+// @Description List all Transactions
+// @Tags Transactions
+// @Accept json
+// @Produce json
+// @Success 200 {object} GetAllTransactionResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /transactions [get]
 func GetAllTransactionHandler(ctx *gin.Context) {
 	transactions := []entity.Transaction{}
 

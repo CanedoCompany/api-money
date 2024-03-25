@@ -50,7 +50,7 @@ func CreateUserHandler(ctx *gin.Context) {
 
 // @BasePath /api/v1
 
-// @Sumary Shoq User
+// @Sumary Show User
 // @Description Show a new User
 // @Tags Users
 // @Accept json

@@ -1,4 +1,50 @@
 definitions:
+  entity.BankResponse:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      nameBank:
+        type: string
+      ownerName:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  entity.CardResponse:
+    properties:
+      createdAt:
+        type: string
+      cvvCard:
+        type: integer
+      id:
+        type: integer
+      nameCard:
+        type: string
+      nameOwner:
+        type: string
+      numberCard:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  entity.TransactionResponse:
+    properties:
+      category:
+        description: DateTransaction time.Time `jsons:"dateTransaction"`
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: integer
+      nameTransaction:
+        type: string
+      updatedAt:
+        type: string
+      value:
+        type: integer
+    type: object
   entity.UserResponse:
     properties:
       createdAt:
@@ -14,6 +60,55 @@ definitions:
       profission:
         type: string
       updatedAt:
+        type: string
+    type: object
+  handler.CreateBankRequest:
+    properties:
+      nameBank:
+        type: string
+      ownerName:
+        type: string
+    type: object
+  handler.CreateBankResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.BankResponse'
+      message:
+        type: string
+    type: object
+  handler.CreateCardRequest:
+    properties:
+      cvvCard:
+        type: integer
+      nameCard:
+        type: string
+      nameOwner:
+        type: string
+      numberCard:
+        type: integer
+    type: object
+  handler.CreateCardResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.CardResponse'
+      message:
+        type: string
+    type: object
+  handler.CreateTransactionRequest:
+    properties:
+      category:
+        description: DateTransaction time.Time `jsons:"dateTransaction"`
+        type: string
+      nameTransaction:
+        type: string
+      value:
+        type: integer
+    type: object
+  handler.CreateTransactionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.TransactionResponse'
+      message:
         type: string
     type: object
   handler.CreateUserRequest:
@@ -34,6 +129,27 @@ definitions:
       message:
         type: string
     type: object
+  handler.DeleteBankResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.BankResponse'
+      message:
+        type: string
+    type: object
+  handler.DeleteCardResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.CardResponse'
+      message:
+        type: string
+    type: object
+  handler.DeleteTransactionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.TransactionResponse'
+      message:
+        type: string
+    type: object
   handler.DeleteUserResponse:
     properties:
       data:
@@ -48,6 +164,24 @@ definitions:
       message:
         type: string
     type: object
+  handler.GetAllBankResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/entity.BankResponse'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.GetAllTransactionResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/entity.TransactionResponse'
+        type: array
+      message:
+        type: string
+    type: object
   handler.GetAllUserResponse:
     properties:
       data:
@@ -57,12 +191,60 @@ definitions:
       message:
         type: string
     type: object
+  handler.ShowBankResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.BankResponse'
+      message:
+        type: string
+    type: object
+  handler.ShowCardResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.CardResponse'
+      message:
+        type: string
+    type: object
+  handler.ShowTransactionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.TransactionResponse'
+      message:
+        type: string
+    type: object
   handler.ShowUserResponse:
     properties:
       data:
         $ref: '#/definitions/entity.UserResponse'
       message:
         type: string
+    type: object
+  handler.UpdateBankRequest:
+    properties:
+      nameBank:
+        type: string
+      ownerName:
+        type: string
+    type: object
+  handler.UpdateCardRequest:
+    properties:
+      cvvCard:
+        type: integer
+      nameCard:
+        type: string
+      nameOwner:
+        type: string
+      numberCard:
+        type: integer
+    type: object
+  handler.UpdateTransactionRequest:
+    properties:
+      category:
+        type: string
+      nameTransaction:
+        type: string
+      value:
+        type: integer
     type: object
   handler.UpdateUserRequest:
     properties:
@@ -78,6 +260,403 @@ definitions:
 info:
   contact: {}
 paths:
+  /bank:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a new Bank
+      parameters:
+      - description: Bank identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteBankResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Banks
+    get:
+      consumes:
+      - application/json
+      description: Show a new Bank
+      parameters:
+      - description: Bank identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ShowBankResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Banks
+    post:
+      consumes:
+      - application/json
+      description: Create a new Bank
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateBankRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateBankResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Banks
+    put:
+      consumes:
+      - application/json
+      description: Update an Bank
+      parameters:
+      - description: Bank identification
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Bank data to Update
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateBankRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateBankResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Banks
+  /banks:
+    get:
+      consumes:
+      - application/json
+      description: List all Banks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetAllBankResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Banks
+  /card:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a new Card
+      parameters:
+      - description: Card identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteCardResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Cards
+    get:
+      consumes:
+      - application/json
+      description: Show a new Card
+      parameters:
+      - description: Card identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ShowCardResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Cards
+    put:
+      consumes:
+      - application/json
+      description: Update an Card
+      parameters:
+      - description: Card identification
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Card data to Update
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateCardRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateCardResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Cards
+  /cards:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Card
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateCardRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateCardResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Cards
+  /transaction:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a new Transaction
+      parameters:
+      - description: Transaction identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Transactions
+    get:
+      consumes:
+      - application/json
+      description: Show a new Transaction
+      parameters:
+      - description: Transaction identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ShowTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Transactions
+    post:
+      consumes:
+      - application/json
+      description: Create a new Transaction
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Transactions
+    put:
+      consumes:
+      - application/json
+      description: Update an Transaction
+      parameters:
+      - description: Transaction identification
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Transaction data to Update
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Transactions
+  /transactions:
+    get:
+      consumes:
+      - application/json
+      description: List all Transactions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetAllTransactionResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      tags:
+      - Transactions
   /user:
     delete:
       consumes:

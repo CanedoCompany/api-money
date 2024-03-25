@@ -8,6 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+
+// @Sumary Create Card
+// @Description Create a new Card
+// @Tags Cards
+// @Accept json
+// @Produce json
+// @Param request body CreateCardRequest true "Request body"
+// @Success 200 {object} CreateCardResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /cards [post]
 func CreateCardHandler(ctx *gin.Context) {
 	request := CreateCardRequest{}
 
@@ -35,6 +47,18 @@ func CreateCardHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "create-card", card)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Show Card
+// @Description Show a new Card
+// @Tags Cards
+// @Accept json
+// @Produce json
+// @Param id query string true "Card identification"
+// @Success 200 {object} ShowCardResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /card [get]
 func GetCardHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -53,6 +77,20 @@ func GetCardHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "show-card", card)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Update Card
+// @Description Update an Card
+// @Tags Cards
+// @Accept json
+// @Produce json
+// @Param id query string true "Card identification"
+// @Param request body UpdateCardRequest true "Card data to Update"
+// @Success 200 {object} CreateCardResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /card [put]
 func EditCardHandler(ctx *gin.Context) {
 	request := UpdateCardRequest{}
 
@@ -103,6 +141,18 @@ func EditCardHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "updating-card", card)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Delete Card
+// @Description Delete a new Card
+// @Tags Cards
+// @Accept json
+// @Produce json
+// @Param id query string true "Card identification"
+// @Success 200 {object} DeleteCardResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /card [delete]
 func DeleteCardHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 

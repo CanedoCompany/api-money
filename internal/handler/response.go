@@ -60,12 +60,57 @@ type CreateTransactionResponse struct {
 	Data    entity.TransactionResponse `json:"data"`
 }
 
+type DeleteTransactionResponse struct {
+	Message string                     `json:"message"`
+	Data    entity.TransactionResponse `json:"data"`
+}
+
+type ShowTransactionResponse struct {
+	Message string                     `json:"message"`
+	Data    entity.TransactionResponse `json:"data"`
+}
+
+type GetAllTransactionResponse struct {
+	Message string                       `json:"message"`
+	Data    []entity.TransactionResponse `json:"data"`
+}
+
 type CreateBankResponse struct {
 	Message string              `json:"message"`
 	Data    entity.BankResponse `json:"data"`
 }
 
+type DeleteBankResponse struct {
+	Message string              `json:"message"`
+	Data    entity.BankResponse `json:"data"`
+}
+
+type ShowBankResponse struct {
+	Message string              `json:"message"`
+	Data    entity.BankResponse `json:"data"`
+}
+
+type GetAllBankResponse struct {
+	Message string                `json:"message"`
+	Data    []entity.BankResponse `json:"data"`
+}
+
 type CreateCardResponse struct {
 	Message string              `json:"message"`
 	Data    entity.CardResponse `json:"data"`
+}
+
+type DeleteCardResponse struct {
+	Message string              `json:"message"`
+	Data    entity.CardResponse `json:"data"`
+}
+
+type ShowCardResponse struct {
+	Message string              `json:"message"`
+	Data    entity.CardResponse `json:"data"`
+}
+
+type GetAllCardResponse struct {
+	Message string                `json:"message"`
+	Data    []entity.CardResponse `json:"data"`
 }

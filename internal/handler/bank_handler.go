@@ -8,6 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+
+// @Sumary Create Bank
+// @Description Create a new Bank
+// @Tags Banks
+// @Accept json
+// @Produce json
+// @Param request body CreateBankRequest true "Request body"
+// @Success 200 {object} CreateBankResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /bank [post]
 func CreateBankHandler(ctx *gin.Context) {
 	request := CreateBankRequest{}
 
@@ -33,6 +45,18 @@ func CreateBankHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "create-bank", bank)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Show Bank
+// @Description Show a new Bank
+// @Tags Banks
+// @Accept json
+// @Produce json
+// @Param id query string true "Bank identification"
+// @Success 200 {object} ShowBankResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /bank [get]
 func GetBankHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -51,6 +75,20 @@ func GetBankHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "show-bank", bank)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Update Bank
+// @Description Update an Bank
+// @Tags Banks
+// @Accept json
+// @Produce json
+// @Param id query string true "Bank identification"
+// @Param request body UpdateBankRequest true "Bank data to Update"
+// @Success 200 {object} CreateBankResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /bank [put]
 func EditBankhandler(ctx *gin.Context) {
 	request := UpdateBankRequest{}
 
@@ -93,6 +131,18 @@ func EditBankhandler(ctx *gin.Context) {
 	sendSuccess(ctx, "updating-bank", bank)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Delete Bank
+// @Description Delete a new Bank
+// @Tags Banks
+// @Accept json
+// @Produce json
+// @Param id query string true "Bank identification"
+// @Success 200 {object} DeleteBankResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /bank [delete]
 func DeleteBankHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -116,6 +166,16 @@ func DeleteBankHandler(ctx *gin.Context) {
 	sendSuccess(ctx, "delete-bank", bank)
 }
 
+// @BasePath /api/v1
+
+// @Sumary Get All Banks
+// @Description List all Banks
+// @Tags Banks
+// @Accept json
+// @Produce json
+// @Success 200 {object} GetAllBankResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /banks [get]
 func GetAllBankHandler(ctx *gin.Context) {
 	banks := []entity.Bank{}
 
